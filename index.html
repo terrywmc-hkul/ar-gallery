@@ -13,6 +13,9 @@
         <a-assets>
             <a-asset-item id="house-obj" src="./models/Bambo_House.obj"></a-asset-item>
             <a-asset-item id="house-mtl" src="./models/Bambo_House.mtl"></a-asset-item>
+            <a-assets>
+                <img id="la-lecture" src="./images/la-lecture.jpg">
+            </a-assets>
           </a-assets>
         <a-marker preset="hiro">
             <a-entity
@@ -20,6 +23,9 @@
             scale="0.05 0.05 0.05"
             obj-model="obj: #house-obj; mtl: #house-mtl"
             ></a-entity>
+        </a-marker>
+        <a-marker preset="A">
+            <a-image src="#la-lecture"></a-image>
         </a-marker>
         <a-entity camera></a-entity>
         </a-scene>
