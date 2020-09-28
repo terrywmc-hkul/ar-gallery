@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.js"></script>
+<script>
+var scenes = [ 
+  {
+    id: "p1",
+    hints:"p1"
+  },
+  <!-- { -->
+    <!-- id: "p3", -->
+    <!-- hints:"p3" -->
+  <!-- }, -->
+  <!-- { -->
+    <!-- id: "p4", -->
+    <!-- hints:"p4" -->
+  <!-- } -->
+];
+
+var current = 0;
+
+AFRAME.registerComponent('markerhandler', {
+  init: function () {
+    var self = this;
+    var scene = self.el.sceneEl;
+    var raycaster = scene.querySelector('[cursor]').components.raycaster;
+    var el = this.el; 
+    var match;
+    var hint;
+    console.log(el.id);
+    console.log(el.components);
+    console.log(el.object3D.visible);
+
+    match = scenes.findIndex(x => x.id === (el.id));
+    console.log(match);
+    if (match >= 0){    
+      el.addEventListener('click', (evt) => {        
+        if(el.object3D.visible){
+          if (match == current && current < scenes.length){
+            current++;
+          }
+          
+          if ( current == scenes.length){
+            alert(el.id);
+            alert("Completed");
+          }else{
+
+            hint = scenes[current].hints;
+            alert("Next hint: "+hint);
+          }
+          
+        }
+      });
+      
+    }else{
+    
+      el.addEventListener('click', () => {
+
+        if(el.object3D.visible){
+  
+          if ( current == scenes.length){
+            alert(el.id);
+            alert("Completed");          
+          }else{
+            hint = scenes[current].hints; 
+            alert("Next hint: "+hint);
+          }
+        }
+      });
+      
+    }
+  }
+});
+
+</script>
+</head>
+<body style="margin : 0px; overflow: hidden;">
+
+  <a-scene
+    vr-mode-ui="enabled: false;"
+    embedded
+    arjs="trackingMethod: best; sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false;" >
+
+    <a-assets>
+      <img id="chest" src="images/chest.gif">
+    </a-assets>
+
+    <a-marker id="p1" preset='custom'  type="pattern" url="markers/pattern-01.patt" emitevents="true" raycaster="objects: [data-raycastable]" cursor="rayOrigin: mouse" markerhandler>
+      <a-image src="#chest" scale="2 2 2" rotation="270 0 0"  data-raycastable></a-image >
+    </a-marker>
+
+    <a-marker id="p2" preset='custom' type="pattern" url="markers/pattern-02.patt" emitevents="true" raycaster="objects: [data-raycastable]" cursor="rayOrigin: mouse" markerhandler>
+        <a-image src="#chest" scale="2 2 2" rotation="270 0 0" data-raycastable></a-image >
+
+    </a-marker>
+
+    <a-marker id="p3" preset='custom' type="pattern" url="markers/pattern-03.patt" emitevents="true" raycaster="objects: [data-raycastable]" cursor="rayOrigin: mouse" markerhandler>
+        <a-image src="#chest" scale="2 2 2" rotation="270 0 0" data-raycastable></a-image >
+        <a-text  scale="1.5 1.5 1.5" position="0 -50 0" rotation="270 0 0" value="WHAT DO YOU DO?" color="white" visbile="false"></a-text>
+    </a-marker>
+    
+    <a-marker id="p4" preset='custom' type="pattern" url="markers/pattern-04.patt" emitevents="true" raycaster="objects: [data-raycastable]" cursor="rayOrigin: mouse" markerhandler>
+        <a-box position='0 0.5 0' color="red" data-raycastable></a-box>
+        <a-text  scale="1.5 1.5 1.5" position="0 -50 0" rotation="270 0 0" value="WHAT DO YOU DO?" color="white" visbile="false"></a-text>
+    </a-marker>
+
+    <a-marker id="p5" preset='custom' type="pattern" url="markers/pattern-05.patt" emitevents="true" raycaster="objects: [data-raycastable]" cursor="rayOrigin: mouse" markerhandler>
+        <a-image src="#chest" scale="2 2 2" rotation="270 0 0" data-raycastable></a-image >
+    </a-marker>
+    
+    <a-marker id="p6" preset='custom' type="pattern" url="markers/pattern-06.patt" emitevents="true" raycaster="objects: [data-raycastable]" cursor="rayOrigin: mouse" markerhandler>
+        <a-image src="#chest" scale="2 2 2" rotation="270 0 0" data-raycastable></a-image >
+    </a-marker>
+    
+    <a-marker id="p7" preset='custom' type="pattern" url="markers/pattern-07.patt" emitevents="true" raycaster="objects: [data-raycastable]" cursor="rayOrigin: mouse" markerhandler>
+        <a-image src="#chest" scale="2 2 2" rotation="270 0 0" data-raycastable></a-image >
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+</body>

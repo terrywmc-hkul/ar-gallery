@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.js"></script>
+<script>
+var scenes = [ 
+  {
+    id: "p1",
+    hints:"h1"
+  },
+  {
+    id: "p3",
+    hints:"h3"
+  },
+  {
+    id: "p4",
+    hints:"h4"
+  }
+];
+
+var current = 0;
+
+AFRAME.registerComponent('click-handler-01', {
+    init: function () {
+        var el = this.el;
+        console.log(el)
+        console.log(el.components)
+        el.addEventListener("click", function (evt) { 
+            var match = scenes.findIndex(x => x.id === (el.id));
+            alert(el.id);
+            alert("I’m unemployed at the moment.");
+        });
+    }
+});
+
+
+</script>
+
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+    <a-scene embedded arjs='debugUIEnabled: false; sourceType: webcam' vr-mode-ui='enabled: false'>
+        <a-assets>
+          <img id="chest-01" src="images/chest1.gif">
+          <img id="chest-02" src="images/chest2.gif">
+          <img id="chest-03" src="images/chest3.gif">
+          <img id="chest-04" src="images/chest4.gif">
+        </a-assets>
+
+        <a-entity camera></a-entity>
+        <a-entity cursor="rayOrigin: mouse" raycaster="objects: .intersectable; useWorldCoordinates: true;"></a-entity>  
+         
+        <a-marker id="marker-pattern-01" type="pattern" url="markers/pattern-01.patt" >
+          <a-image id="p1" class="intersectable" click-handler-01 src="#chest-01" scale="1 1 1" rotation="270 0 0"></a-image >
+        </a-marker>
+        
+        <a-marker id="marker-pattern-02" type="pattern" url="markers/pattern-02.patt" >
+          <a-image  id="p2" class="intersectable" click-handler src="#chest-02" scale="1.5 1.5 1.5" rotation="270 0 0"></a-image >
+        </a-marker>
+        
+        <a-marker id="marker-pattern-03" type="pattern" url="markers/pattern-03.patt" >
+          <a-image  id="p3" class="intersectable" click-handler src="#chest-03" scale="1.5 1.5 1.5" rotation="270 0 0"></a-image >
+        </a-marker>
+        
+        <a-marker id="marker-pattern-04" type="pattern" url="markers/pattern-04.patt" >
+            <a-image id="p4" class="intersectable" click-handler src="#chest-04" scale="1.5 1.5 1.5" rotation="270 0 0"></a-image>
+        </a-marker>
+
+    </a-scene>
+   
+</body>
+</html>
