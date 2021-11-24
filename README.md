@@ -1,8 +1,8 @@
 # AR playground
 
 ## Show object
-/show_objects
+https://terrywmc-hkul.github.io/show_objects
 
 
 ## Simple treasure hunt
-/treasure_hunt
+https://terrywmc-hkul.github.io/treasure_hunt
